@@ -1,42 +1,40 @@
 import streamlit as st
 import time
 
-st.set_page_config(page_title="Ucapan Ulang Tahun", page_icon="🎉", layout="centered")
+# Konfigurasi halaman
+st.set_page_config(page_title="Ucapan Ulang Tahun untuk Ica", page_icon="🎂", layout="centered")
 
-# Animasi awal
+# Animasi pembuka
+st.snow()
 st.balloons()
-st.markdown("<h1 style='text-align: center; color: #FF69B4;'>🎂 Ucapan Ulang Tahun 🎂</h1>", unsafe_allow_html=True)
 
-# Input dari pengguna
-nama = st.text_input("Masukkan nama orang yang berulang tahun:", "")
-umur = st.number_input("Masukkan usia sekarang:", min_value=1, max_value=150, step=1)
+# Judul
+st.markdown("<h1 style='text-align: center; color: #ff4b4b;'>🎉 Selamat Ulang Tahun Ica! 🎉</h1>", unsafe_allow_html=True)
 
-# Jika nama diisi, tampilkan ucapan
-if nama:
-    st.markdown("---")
-    st.markdown(f"### Hai {nama}! 🥳")
+# Efek loading sebelum ucapan muncul
+with st.spinner("Membuka pesan spesial..."):
+    time.sleep(2)
 
-    # Efek loading seolah-olah sedang menyiapkan ucapan
-    with st.spinner("Menyiapkan ucapan spesial untukmu..."):
-        time.sleep(2)
+# Ucapan ulang tahun
+ucapan = """
+<div style='font-size: 18px; text-align: justify; color: #444; line-height: 1.8;'>
 
-    # Ucapan ulang tahun
-    ucapan = f"""
-    <div style='font-size: 18px; color: #444;'>
-        Hari ini spesial karena dunia diberkati dengan kelahiranmu {umur} tahun yang lalu. 🎈<br><br>
+Hari ini bukan hari biasa... karena tepat 18 tahun yang lalu, seorang bintang lahir ke dunia ini 🌟<br><br>
 
-        Semoga di usia yang baru ini, {nama} selalu diberi kebahagiaan, kesehatan, dan kesuksesan tanpa batas. ✨<br><br>
+Selamat ulang tahun yang ke-18, <b>Ica</b>! 🥳 <br><br>
 
-        Teruslah bersinar dan menjadi versi terbaik dari dirimu!<br><br>
+Di usia yang baru ini, semoga setiap langkahmu dipenuhi keberanian, setiap harapanmu dipenuhi cahaya, dan setiap mimpimu menjadi nyata satu per satu.✨<br><br>
 
-        <b>Selamat ulang tahun, {nama}! 🎉🎁</b>
-    </div>
-    """
-    st.markdown(ucapan, unsafe_allow_html=True)
+Terima kasih sudah menjadi pribadi yang kuat, manis, dan menginspirasi banyak orang. Dunia lebih indah dengan kehadiranmu 💖<br><br>
 
-    st.success("Ucapan dikirim dengan cinta 💖")
+<b>Jangan lupa bahagia hari ini, karena kamu pantas mendapatkannya sepenuhnya! 🎁🎈</b><br><br>
 
-    # Tambahan: tombol untuk download ucapan sebagai file txt
-    if st.button("📥 Download Ucapan"):
-        isi = f"Selamat Ulang Tahun, {nama}!\n\nSemoga di usia ke-{umur} ini kamu selalu diberi kebahagiaan, kesehatan, dan kesuksesan.\nTeruslah bersinar dan menjadi pribadi yang luar biasa!\n\n🎂🎉🎁"
-        st.download_button("Klik untuk mengunduh ucapan 🎊", data=isi, file_name=f"Ucapan_Ulang_Tahun_{nama}.txt")
+Dengan cinta dan doa terbaik selalu 💌
+
+</div>
+"""
+st.markdown(ucapan, unsafe_allow_html=True)
+
+# Penutup
+st.markdown("---")
+st.markdown("<p style='text-align: center; font-size:16px; color:gray;'>Dari seseorang yang peduli 🌹</p>", unsafe_allow_html=True)
