@@ -114,12 +114,3 @@ def custom_content_panels():
         st.write("Semoga segala luka pelan-pelan berubah jadi pelajaran, segala harapan yang pernah tertunda kini mulai satu per satu datang menghampiri. Semoga kamu nggak pernah kehilangan semangat untuk mencintai hidup, meski hidup tak selalu mudah. Dan semoga… kamu terus diberi alasan untuk tersenyum, tanpa harus berpura-pura.")
         sr.write("Selamat ulang tahun. Terima kasih karena sudah menjadi kamu. Tetap jadi cahaya, meski kadang kamu harus berjalan dalam gelap. Aku doakan kamu selalu bahagia bukan hanya saat difoto, tapi juga saat kamu sendiri, saat kamu berdoa, saat kamu tertawa tanpa alasan. Karena kamu pantas mendapatkan itu semua. 🌷")
 
-# Main function untuk menjalankan aplikasiS
-def main():
-    
-    style_app()
-    display_main_app()
-    custom_content_panels()
-
-if __name__ == "__main__":
-    main()
