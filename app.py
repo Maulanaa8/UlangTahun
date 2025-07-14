@@ -66,8 +66,8 @@ st.balloons()
 st.snow()
 
 # Judul dan subjudul
-st.markdown("<h1>Selamat Ulang Tahun, Ica!</h1>", unsafe_allow_html=True)
-st.markdown("<div class='subtitle'>✨ 18 Tahun — Awal Kisah Hebatmu ✨</div>", unsafe_allow_html=True)
+st.markdown("<h1>Selamat Ulang Tahun, Ica!!</h1>", unsafe_allow_html=True)
+st.markdown("<div class='subtitle'>✨ Happy Eighteen Years ✨</div>", unsafe_allow_html=True)
 
 # Loading simulasi
 with st.spinner("Membuka surat ulang tahun dari hati terdalam... 💌"):
@@ -77,7 +77,7 @@ with st.spinner("Membuka surat ulang tahun dari hati terdalam... 💌"):
 st.markdown("""
 <div class='card'>
 
-🌸 Hari ini adalah hari yang sangat spesial, karena tepat 18 tahun yang lalu, seorang gadis luar biasa bernama <b>Ica</b> lahir ke dunia. 🌍<br><br>
+Hari ini adalah hari yang spesial, karena tepat 18 tahun yang lalu, seorang gadis luar biasa seperti kamu terlahir ke dunia. 🌍<br><br>
 
 Semoga di usia barumu ini, kamu menemukan kebahagiaan sejati, tetap ceria seperti biasanya, dan tidak pernah kehilangan semangat untuk bermimpi besar. 🎯<br><br>
 
@@ -89,5 +89,5 @@ Teruslah melangkah dengan hati yang tulus, senyum yang hangat, dan cinta yang pe
 
 </div>
 
-<div class='footer'>— Dengan doa terbaik, dari seseorang yang mengagumi ketulusanmu 🌹</div>
+<div class='footer'>— Dengan doa terbaik, dariku 🌹</div>
 """, unsafe_allow_html=True)
