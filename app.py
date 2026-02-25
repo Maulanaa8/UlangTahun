@@ -1,35 +1,54 @@
 import streamlit as st
 from datetime import datetime
 
-st.set_page_config(page_title="Happy Birthday Community", page_icon="🎉", layout="wide")
+st.set_page_config(page_title="Happy Birthday", page_icon="🎉", layout="wide")
 
 # ===== CUSTOM CSS =====
 st.markdown("""
 <style>
-body {
-    background: linear-gradient(135deg, #c3cfe2, #f5c6ec);
+
+html, body, [class*="css"]  {
+    scroll-behavior: smooth;
+}
+
+section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 50px;
 }
 
 .hero {
-    text-align: center;
-    padding: 120px 20px;
-    animation: fadeIn 2s ease-in;
-}
-
-.title {
-    font-size: 60px;
-    font-weight: bold;
+    background: linear-gradient(135deg, #d4c1ec, #fbc2eb);
     color: white;
 }
 
+.gallery {
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+}
+
+.ucapan {
+    background: linear-gradient(135deg, #fddb92, #d1fdff);
+}
+
+.title {
+    font-size: 70px;
+    font-weight: bold;
+    animation: fadeIn 2s ease-in-out;
+}
+
 .subtitle {
-    font-size: 24px;
-    color: #f0f0f0;
+    font-size: 25px;
+    margin-top: 20px;
+    animation: fadeIn 3s ease-in-out;
 }
 
 @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {opacity:0; transform:translateY(30px);}
+    to {opacity:1; transform:translateY(0);}
 }
 
 .floating {
@@ -37,30 +56,76 @@ body {
 }
 
 @keyframes float {
-    0% {transform: translatey(0px);}
-    50% {transform: translatey(-20px);}
-    100% {transform: translatey(0px);}
+    0% {transform: translateY(0px);}
+    50% {transform: translateY(-20px);}
+    100% {transform: translateY(0px);}
 }
+
+img {
+    border-radius: 20px;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
-# ===== HERO SECTION =====
+# ===== SLIDE 1 - HERO =====
 st.markdown("""
-<div class="hero">
+<section class="hero">
     <div class="title">HAPPY BIRTHDAY</div>
     <div class="subtitle">Komunitas Hebat & Inspiratif 🚀</div>
-</div>
+    <p style="margin-top:30px;">Scroll ke bawah ⬇</p>
+</section>
 """, unsafe_allow_html=True)
 
-# ===== COUNTDOWN =====
+# ===== SLIDE 2 - GALLERY =====
+st.markdown("""
+<section class="gallery">
+    <h1>📸 Kenangan Indah</h1>
+</section>
+""", unsafe_allow_html=True)
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.image("images/foto1.jpg", use_container_width=True)
+with col2:
+    st.image("images/foto2.jpg", use_container_width=True)
+with col3:
+    st.image("images/foto3.jpg", use_container_width=True)
+
+# ===== SLIDE 3 - UCAPAN =====
+st.markdown("""
+<section class="ucapan">
+    <h1>💌 Kirim Ucapan</h1>
+</section>
+""", unsafe_allow_html=True)
+
+if "ucapan_list" not in st.session_state:
+    st.session_state.ucapan_list = []
+
+with st.form("form_ucapan"):
+    nama = st.text_input("Nama")
+    pesan = st.text_area("Ucapan")
+    submit = st.form_submit_button("Kirim 🎉")
+
+    if submit:
+        st.session_state.ucapan_list.append((nama, pesan))
+        st.success("Ucapan terkirim!")
+
+st.markdown("### ✨ Ucapan Anggota")
+
+for nama, pesan in st.session_state.ucapan_list:
+    st.markdown(f"""
+        <div style="
+            background:white;
+            padding:15px;
+            border-radius:15px;
+            margin-bottom:10px;">
+            <b>{nama}</b><br>{pesan}
+        </div>
+    """, unsafe_allow_html=True)
+
+# ===== CONFETTI OTOMATIS SAAT HARI H =====
 tanggal_acara = datetime(2026, 3, 10)
-sekarang = datetime.now()
-selisih = tanggal_acara - sekarang
-
-st.markdown("---")
-if selisih.days > 0:
-    st.info(f"🎂 {selisih.days} Hari Menuju Perayaan!")
-else:
-    st.success("🎉 Hari Ini Perayaan Dimulai!")
-
-st.markdown("### 🎈 Gunakan Menu di Sidebar untuk Melihat Halaman Lain")
+if datetime.now().date() == tanggal_acara.date():
+    st.balloons()
