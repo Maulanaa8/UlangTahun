@@ -1,93 +1,81 @@
 import streamlit as st
+from datetime import datetime
 import time
 
+# Konfigurasi halaman
 st.set_page_config(
-    page_title="Selamat Ulang Tahun Ica 🎂",
-    page_icon="🎀",
+    page_title="Ulang Tahun Komunitas",
+    page_icon="🎉",
     layout="centered"
 )
 
-# Tambahkan CSS estetik
-st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap');
+# ====== HEADER ======
+st.title("🎉 Selamat Ulang Tahun Komunitas Kita 🎉")
+st.write("Bersama, Bertumbuh, dan Menginspirasi 🚀")
 
-body {
-    background: linear-gradient(135deg, #ffe4ec 0%, #fcefee 100%);
-}
+# ====== COUNTDOWN ======
+tanggal_acara = datetime(2026, 3, 10)
+sekarang = datetime.now()
+selisih = tanggal_acara - sekarang
 
-h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 64px;
-    color: #e75480;
-    text-align: center;
-    margin-bottom: 0;
-}
+if selisih.days > 0:
+    st.info(f"⏳ Menuju hari spesial: {selisih.days} hari lagi!")
+else:
+    st.success("🎂 Hari Ini Ulang Tahun Komunitas! 🎂")
 
-.subtitle {
-    text-align: center;
-    font-size: 22px;
-    color: #555;
-    font-family: 'Quicksand', sans-serif;
-    margin-bottom: 30px;
-}
+st.divider()
 
-.card {
-    background-color: #ffffffdd;
-    padding: 40px;
-    border-radius: 20px;
-    max-width: 700px;
-    margin: auto;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    font-family: 'Quicksand', sans-serif;
-    font-size: 18px;
-    color: #333;
-    line-height: 1.8;
-    animation: fadeIn 2s ease-in-out;
-}
+# ====== GALERI FOTO ======
+st.subheader("📸 Kenangan Perjalanan Komunitas")
 
-.footer {
-    margin-top: 30px;
-    text-align: center;
-    font-style: italic;
-    color: #999;
-    font-size: 15px;
-}
+col1, col2 = st.columns(2)
 
-@keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
-}
-</style>
-""", unsafe_allow_html=True)
+with col1:
+    st.image("https://picsum.photos/400/300", caption="Kegiatan 1")
+    st.image("https://picsum.photos/401/300", caption="Kegiatan 2")
 
-# Efek animasi sederhana
-st.balloons()
-st.snow()
+with col2:
+    st.image("https://picsum.photos/402/300", caption="Kegiatan 3")
+    st.image("https://picsum.photos/403/300", caption="Kegiatan 4")
 
-# Judul dan subjudul
-st.markdown("<h1>Selamat Ulang Tahun, Ica!!</h1>", unsafe_allow_html=True)
-st.markdown("<div class='subtitle'>✨ Happy Eighteen Years ✨</div>", unsafe_allow_html=True)
+st.divider()
 
-# Loading simulasi
-with st.spinner("Membuka surat ulang tahun dari hati terdalam... 💌"):
-    time.sleep(2.5)
+# ====== FORM UCAPAN ======
+st.subheader("💌 Kirim Doa & Harapan")
 
-# Konten ucapan
-st.markdown("""
-<div class='card'>
+if "ucapan_list" not in st.session_state:
+    st.session_state.ucapan_list = []
 
-Hari ini adalah hari yang spesial, karena tepat 18 tahun yang lalu, seorang gadis luar biasa seperti kamu terlahir ke dunia. 🌍<br><br>
+with st.form("form_ucapan"):
+    nama = st.text_input("Nama")
+    pesan = st.text_area("Tulis ucapan terbaikmu...")
+    submit = st.form_submit_button("Kirim 🎉")
 
-Semoga di usia barumu ini, kamu menemukan kebahagiaan sejati, tetap ceria seperti biasanya, dan tidak pernah kehilangan semangat untuk bermimpi besar. 🎯<br><br>
+    if submit:
+        if nama and pesan:
+            st.session_state.ucapan_list.append({
+                "nama": nama,
+                "pesan": pesan
+            })
+            st.success("Ucapan berhasil dikirim 🎉")
+        else:
+            st.warning("Isi semua field dulu ya!")
 
-Di umur ke-18 ini, kamu bukan hanya tumbuh secara usia, tapi juga sebagai pribadi yang makin kuat, dewasa, dan menginspirasi. Jadilah cahaya, untuk dirimu dan dunia. ✨<br><br>
+# ====== TAMPILKAN UCAPAN ======
+st.divider()
+st.subheader("✨ Ucapan dari Anggota")
 
-Teruslah melangkah dengan hati yang tulus, senyum yang hangat, dan cinta yang penuh pada hidupmu sendiri. 💖<br><br>
-
-<b>Happy 18th Birthday, Ica! 🎂 Semoga semua hal indah berpihak padamu hari ini dan selamanya.</b>
-
-</div>
-
-<div class='footer'>— Dengan doa terbaik, dariku 🌹</div>
-""", unsafe_allow_html=True)
+for u in st.session_state.ucapan_list:
+    st.markdown(
+        f"""
+        <div style="
+            background-color:#f0f2f6;
+            padding:15px;
+            border-radius:10px;
+            margin-bottom:10px;">
+            <b>{u['nama']}</b><br>
+            {u['pesan']}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
