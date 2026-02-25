@@ -1,81 +1,66 @@
 import streamlit as st
 from datetime import datetime
-import time
 
-# Konfigurasi halaman
-st.set_page_config(
-    page_title="Ulang Tahun Komunitas",
-    page_icon="🎉",
-    layout="centered"
-)
+st.set_page_config(page_title="Happy Birthday Community", page_icon="🎉", layout="wide")
 
-# ====== HEADER ======
-st.title("🎉 Selamat Ulang Tahun Komunitas Kita 🎉")
-st.write("Bersama, Bertumbuh, dan Menginspirasi 🚀")
+# ===== CUSTOM CSS =====
+st.markdown("""
+<style>
+body {
+    background: linear-gradient(135deg, #c3cfe2, #f5c6ec);
+}
 
-# ====== COUNTDOWN ======
+.hero {
+    text-align: center;
+    padding: 120px 20px;
+    animation: fadeIn 2s ease-in;
+}
+
+.title {
+    font-size: 60px;
+    font-weight: bold;
+    color: white;
+}
+
+.subtitle {
+    font-size: 24px;
+    color: #f0f0f0;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.floating {
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {transform: translatey(0px);}
+    50% {transform: translatey(-20px);}
+    100% {transform: translatey(0px);}
+}
+</style>
+""", unsafe_allow_html=True)
+
+# ===== HERO SECTION =====
+st.markdown("""
+<div class="hero">
+    <div class="title">HAPPY BIRTHDAY</div>
+    <div class="subtitle">Komunitas Hebat & Inspiratif 🚀</div>
+</div>
+""", unsafe_allow_html=True)
+
+# ===== COUNTDOWN =====
 tanggal_acara = datetime(2026, 3, 10)
 sekarang = datetime.now()
 selisih = tanggal_acara - sekarang
 
+st.markdown("---")
 if selisih.days > 0:
-    st.info(f"⏳ Menuju hari spesial: {selisih.days} hari lagi!")
+    st.info(f"🎂 {selisih.days} Hari Menuju Perayaan!")
 else:
-    st.success("🎂 Hari Ini Ulang Tahun Komunitas! 🎂")
+    st.success("🎉 Hari Ini Perayaan Dimulai!")
 
-st.divider()
-
-# ====== GALERI FOTO ======
-st.subheader("📸 Kenangan Perjalanan Komunitas")
-
-col1, col2 = st.columns(2)
-
-with col1:
-    st.image("https://picsum.photos/400/300", caption="Kegiatan 1")
-    st.image("https://picsum.photos/401/300", caption="Kegiatan 2")
-
-with col2:
-    st.image("https://picsum.photos/402/300", caption="Kegiatan 3")
-    st.image("https://picsum.photos/403/300", caption="Kegiatan 4")
-
-st.divider()
-
-# ====== FORM UCAPAN ======
-st.subheader("💌 Kirim Doa & Harapan")
-
-if "ucapan_list" not in st.session_state:
-    st.session_state.ucapan_list = []
-
-with st.form("form_ucapan"):
-    nama = st.text_input("Nama")
-    pesan = st.text_area("Tulis ucapan terbaikmu...")
-    submit = st.form_submit_button("Kirim 🎉")
-
-    if submit:
-        if nama and pesan:
-            st.session_state.ucapan_list.append({
-                "nama": nama,
-                "pesan": pesan
-            })
-            st.success("Ucapan berhasil dikirim 🎉")
-        else:
-            st.warning("Isi semua field dulu ya!")
-
-# ====== TAMPILKAN UCAPAN ======
-st.divider()
-st.subheader("✨ Ucapan dari Anggota")
-
-for u in st.session_state.ucapan_list:
-    st.markdown(
-        f"""
-        <div style="
-            background-color:#f0f2f6;
-            padding:15px;
-            border-radius:10px;
-            margin-bottom:10px;">
-            <b>{u['nama']}</b><br>
-            {u['pesan']}
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+st.markdown("### 🎈 Gunakan Menu di Sidebar untuk Melihat Halaman Lain")
